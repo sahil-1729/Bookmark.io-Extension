@@ -18,7 +18,7 @@ const Logout = () => {
         Welcome
         <button onClick={() => {
             supabase.auth.signOut()
-        }} className="bg-primary text-secondary rounded-md px-4 py-2  mb-2">
+        }} className="bg-primary-foreground text-secondary rounded-md px-4 py-2  mb-2">
             Sign out
         </button>
         {/* <DialogForm /> */}
@@ -88,7 +88,7 @@ export default Logout
 //     // console.log('the value ', form.watch('link'))
 
 //     return (
-//         <div className="primary sm:w-[32rem] sm:h-max w-full h-full">
+//         <div className="primary sm:w-lg sm:h-max w-full h-full">
 //             <div>
 
 //                 <h1>Add bookmark
