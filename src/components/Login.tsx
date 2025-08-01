@@ -1,9 +1,22 @@
-import { createClient } from "@supabase/supabase-js"
-import React, { useState } from "react"
+import { createClient, Session } from "@supabase/supabase-js"
+import React, { useEffect, useState } from "react"
+import Logout from "./Logout"
 
 const supabase = createClient(`${import.meta.env.VITE_SUPABASE_URL}`, `${import.meta.env.VITE_SUPABASE_ANON_KEY}`)
 
 const Login = () => {
+
+    const [session, setSession] = useState<Session | null>(null)
+
+    useEffect(() => {
+        supabase.auth.getSession().then(({ data: { session } }) => {
+            setSession(session)
+        })
+
+        supabase.auth.onAuthStateChange((_event, session) => {
+            setSession(session)
+        })
+    }, [])
 
     const [formData, setFormData] = useState({
         email: "",
@@ -34,65 +47,74 @@ const Login = () => {
         }
     }
 
-    return (<div className="">
-        <div className="w-full p-8 rounded-lg border-2 border-primary px-8 sm:max-w-md mx-auto mt-4">
-            <form action="/addBookmark"
-                onSubmit={(e) => {
-                    // console.log(formData)
-                    signin()
-                    e.preventDefault()
 
-                }}
-                className="animate-in flex-1 flex flex-col w-full justify-center gap-2 text-foreground mb-4">
-                <label className="text-md" htmlFor="email">
-                    Email
-                </label>
-                <input
-                    className="rounded-md px-4 py-2  border-2 border-primary mb-6"
-                    name="email"
-                    type="email"
-                    placeholder=""
-                    required
-                    onChange={(e) => {
-                        onChange(e)
+
+    return session ? <Logout />
+        :
+        (<div className="">
+            <div className="w-full p-8 rounded-lg border-2 border-primary px-8 sm:max-w-md mx-auto mt-4">
+                <form action="/addBookmark"
+                    onSubmit={(e) => {
+                        // console.log(formData)
+                        signin()
+                        e.preventDefault()
+
                     }}
-                />
-                <label className="text-md" htmlFor="password">
-                    Password
-                </label>
-                <input
-                    className="rounded-md px-4 py-2  border-2 border-primary mb-6"
-                    type="password"
-                    name="password"
-                    placeholder=""
-                    required
-                    onChange={(e) => {
-                        onChange(e)
-                    }}
-                />
-                <button type="submit" className="bg-primary text-secondary rounded-md px-4 py-2  mb-2">
-                    Sign In
-                </button>
-            </form>
+                    className="animate-in flex-1 flex flex-col w-full justify-center gap-2 text-foreground mb-4">
+                    <label className="text-md" htmlFor="email">
+                        Email
+                    </label>
+                    <input
+                        className="rounded-md px-4 py-2  border-2 border-primary mb-6"
+                        name="email"
+                        type="email"
+                        placeholder=""
+                        required
+                        onChange={(e) => {
+                            onChange(e)
+                        }}
+                    />
+                    <label className="text-md" htmlFor="password">
+                        Password
+                    </label>
+                    <input
+                        className="rounded-md px-4 py-2  border-2 border-primary mb-6"
+                        type="password"
+                        name="password"
+                        placeholder=""
+                        required
+                        onChange={(e) => {
+                            onChange(e)
+                        }}
+                    />
+                    <button type="submit" className="bg-primary text-secondary rounded-md px-4 py-2  mb-2">
+                        Sign In
+                    </button>
+                </form>
 
-            <a
-                href="/signup"
-                className="rounded-md no-underline text-foreground text-sm"
-            >
-                Don&apos;t have an Account? Sign Up
-            </a>
-            <br />
+                <a
+                    href="/signup"
+                    className="rounded-md no-underline text-foreground text-sm"
+                >
+                    Don&apos;t have an Account? Sign Up
+                </a>
+                <br />
 
-            <h1 className='text-2xl text-center my-4'>
-                OR
-            </h1>
+                <h1 className='text-2xl text-center my-4'>
+                    OR
+                </h1>
 
-            <div className='flex justify-center'>
-                Sign in using google
+                <div className="flex justify-center">
+                    <button className="bg-primary text-secondary rounded-md px-4 py-2 mb-2 flex flex-row gap-2 ">
+                        <p className="text-md md:text-lg" >
+                            Login using Google
+                        </p>
+                    </button>
+                </div>
+
+
             </div>
-
-        </div>
-    </div>)
+        </div>)
 }
 
 export default Login
