@@ -29,7 +29,6 @@
     "zod": "^4.0.14"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4.1.11",
     "@types/node": "^24.1.0",
     "@types/react": "^18.2.45",
     "@types/react-dom": "^18.2.18",
@@ -42,6 +41,7 @@
     "eslint-plugin-react-refresh": "^0.4.5",
     "postcss": "^8.4.32",
     "tailwindcss": "^4.1.11",
+    "tw-animate-css": "^1.3.6",
     "typescript": "^5.2.2",
     "vite": "^5.0.8"
   }
