@@ -65,7 +65,7 @@ export default function BookmarkForm() {
 
             axios({
                 method: 'post',
-                baseURL: 'http://localhost:3000/api/getMetadata',
+                baseURL: `${import.meta.env.VITE_BACKEND_URL}`,
                 // url: 'localhost:3000/getMetadata',
                 data: finalData,
                 headers: {
@@ -211,7 +211,7 @@ export default function BookmarkForm() {
                     {/* <div className="sm:justify-start"> */}
 
                     <Button type="submit"
-                        className={clsx('', {
+                        className={clsx('w-full', {
                             // 'hidden': !(form.getValues('categories')) || !(form.getValues('link')) || !(form.getValues('labels'))
                         })}
                     >

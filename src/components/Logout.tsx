@@ -1,7 +1,4 @@
 import BookmarkForm from "./BookmarkForm";
-import { supabase } from "@/utils/createClient";
-
-
 
 const Logout = () => {
     return (<div>
@@ -9,11 +6,11 @@ const Logout = () => {
             <h1 className="bold text-2xl">
                 Bookmark.io
             </h1>
-            <button onClick={() => {
+            {/* <button onClick={() => {
                 supabase.auth.signOut()
             }} className="bg-primary text-secondary-foreground rounded-md px-4 py-2  mb-2">
                 Sign out
-            </button>
+            </button> */}
         </div>
 
         <BookmarkForm />
