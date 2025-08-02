@@ -9,7 +9,8 @@ import { X } from "lucide-react";
 import { Form, FormField, FormItem, FormLabel, FormControl, FormDescription, FormMessage } from "./ui/form";
 import { Input } from "./ui/input";
 import { cn } from "@/lib/utils";
-
+import { supabase } from "@/utils/createClient";
+import axios from "axios";
 
 const formSchema = z.object({
 
@@ -43,16 +44,40 @@ export default function BookmarkForm() {
         },
     })
 
-    function onSubmit(values: z.infer<typeof formSchema>) {
-
+    async function onSubmit(values: z.infer<typeof formSchema>) {
 
         console.log('success ', values)
 
         values.categories = values.categories.trim()
+
         form.reset()
         setTags([])
 
+        const response = await supabase.auth.getSession()
 
+        if (response.data) {
+            console.log(response.data)
+            const finalData = {
+                ...values,
+                // email: response.data.user.email,
+                // user_id: response.data.user.id,
+            }
+
+            axios({
+                method: 'post',
+                baseURL: 'http://localhost:3000/api/getMetadata',
+                // url: 'localhost:3000/getMetadata',
+                data: finalData,
+                headers: {
+                    Authorization: `Bearer ${response.data.session?.access_token}`
+                }
+            }).then((res) => {
+                console.log(res)
+            }).catch(error => {
+                console.log(error)
+            })
+
+        }
 
     }
 
