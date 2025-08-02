@@ -1,5 +1,5 @@
 import BookmarkForm from "./BookmarkForm";
-import { supabase } from "@/utils/utils";
+import { supabase } from "@/utils/createClient";
 
 
 

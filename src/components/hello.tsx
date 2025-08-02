@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
-import { createClient, Session } from '@supabase/supabase-js'
+import { Session } from '@supabase/supabase-js'
 import { Auth } from '@supabase/auth-ui-react'
 import { ThemeSupa } from '@supabase/auth-ui-shared'
+import { supabase } from '@/utils/createClient'
 
-const supabase = createClient(`${import.meta.env.VITE_SUPABASE_URL}`, `${import.meta.env.VITE_SUPABASE_ANON_KEY}`)
 
 export default function App() {
   const [session, setSession] = useState<Session | null>(null)

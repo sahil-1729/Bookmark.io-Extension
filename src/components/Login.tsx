@@ -1,8 +1,8 @@
-import { createClient, Session } from "@supabase/supabase-js"
+import { Session } from "@supabase/supabase-js"
 import React, { useEffect, useState } from "react"
 import Logout from "./Logout"
+import { supabase } from "@/utils/createClient"
 
-const supabase = createClient(`${import.meta.env.VITE_SUPABASE_URL}`, `${import.meta.env.VITE_SUPABASE_ANON_KEY}`)
 
 const Login = () => {
 
